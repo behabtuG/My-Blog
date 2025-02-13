@@ -58,10 +58,13 @@ BACKEND_PUBLIC_API_URL=http://localhost:5000/
     Push to the branch (git push origin feature/AmazingFeature).
     Open a pull request.
 # Home pages
+
 <img width="991" alt="blog home page" src="https://github.com/user-attachments/assets/7f71fc0d-cce0-40eb-ba9c-42632b8688f0" />
 # Admin Pannel page 
+
 <img width="1058" alt="Admin panel" src="https://github.com/user-attachments/assets/c0e6884b-5b6e-4abc-a52c-3a617c7bc92c" />
 # Reading The article page
+
 <img width="1004" alt="Read the article " src="https://github.com/user-attachments/assets/299830c1-14ba-42b8-b3bf-8d1aa49eea81" />
 
 
