@@ -35,9 +35,11 @@ app.use(
   })
 );
 
-app.use(cookieParser()); // ✅ Parse cookies
-app.use(express.json());
-app.use(morgan("dev"));
+// Middleware order is crucial!
+app.use(morgan("dev")); // Log requests *before* other middleware
+app.use(cookieParser()); // Parse cookies *before* routes that use them
+app.use(express.json({ limit: "50mb" })); // Parse JSON *before* routes that use it
+app.use(express.urlencoded({ limit: "50mb", extended: true })); // Parse URL-encoded *before* routes
 
 //✅ Serve static files first
 app.use(express.static(path.join(__dirname, "/client/dist")));
@@ -51,6 +53,10 @@ app.use("/api/comment", commentRoutes);
 //✅ Catch-all route for serving React frontend
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
 //✅ Global error handler (must be last)

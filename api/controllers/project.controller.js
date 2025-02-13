@@ -135,27 +135,6 @@ export const updateProject = async (req, res, next) => {
   }
 };
 
-/*export const updateProject = async (req, res, next) => {
-  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-    return next(errorHandler(403, "You are not allowed to update this post"));
-  }
-  try {
-    const updatedProject = await Project.findByIdAndUpdate(
-      req.params.projectId,
-      req.body,
-      { new: true }
-    );
-
-    if (!updatedProject) {
-      return next(errorHandler(404, "Project not found"));
-    }
-
-    res.status(200).json(updatedProject);
-  } catch (error) {
-    next(error);
-  }
-};
-*/
 // Delete a project
 export const deleteProject = async (req, res, next) => {
   if (!req.user.isAdmin || req.user.id !== req.params.userId) {
