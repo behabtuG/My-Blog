@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "api/server.js", 
+  "main": "api/server.js",
   "scripts": {
     "dev": "nodemon api/server.js",
     "start": "node api/server.js"
