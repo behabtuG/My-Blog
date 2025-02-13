@@ -13,6 +13,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function UpdatePost() {
   const [file, setFile] = useState(null);
@@ -31,7 +32,7 @@ export default function UpdatePost() {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:5000/api/post/getposts?postId=${postId}`,
+          `${API_BASE_URL}/api/post/getposts?postId=${postId}`,
           { credentials: "include" }
         );
         const data = await res.json();
@@ -102,7 +103,7 @@ export default function UpdatePost() {
     }
     try {
       const res = await fetch(
-        `http://localhost:5000/api/post/updatepost/${formData._id}/${currentUser._id}`,
+        `${API_BASE_URL}/api/post/updatepost/${formData._id}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {

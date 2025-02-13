@@ -8,6 +8,7 @@ import {
   signInFailure,
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -24,7 +25,9 @@ export default function SignIn() {
     }
     try {
       dispatch(signInStart());
-      const res = await fetch("http://localhost:5000/api/auth/signin", {
+      // const res = await fetch(
+      //   `${import.meta.env.VITE_REACT_BACKEND_BASEURL}/api/auth/signin`
+      const res = await fetch(`${API_BASE_URL}/api/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // ✅ Allows cookies to be stored

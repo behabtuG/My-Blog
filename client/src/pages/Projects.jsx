@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CallToAction from "../components/CallToAction";
 import ProjectCard from "../components/ProjectCard";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
@@ -11,9 +12,7 @@ export default function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch(
-          "http://localhost:5000/api/project/getprojects"
-        );
+        const res = await fetch(`${API_BASE_URL}/api/project/getprojects`);
         if (!res.ok) {
           throw new Error("Failed to fetch projects");
         }

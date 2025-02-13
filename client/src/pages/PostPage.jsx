@@ -1,9 +1,9 @@
 import { Button, Spinner } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-// import CallToAction from "../components/CallToAction";
 import CommentSection from "../components/CommentSection";
 import PostCard from "../components/PostCard";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function PostPage() {
   const { postSlug } = useParams();
@@ -17,7 +17,7 @@ export default function PostPage() {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://localhost:5000/api/post/getposts?slug=${postSlug}`
+          `${API_BASE_URL}/api/post/getposts?slug=${postSlug}`
         );
         const data = await res.json();
         if (!res.ok) {
@@ -41,9 +41,7 @@ export default function PostPage() {
   useEffect(() => {
     try {
       const fetchRecentPosts = async () => {
-        const res = await fetch(
-          `http://localhost:5000/api/post/getposts?limit=3`
-        );
+        const res = await fetch(`${API_BASE_URL}/api/post/getposts?limit=3`);
         const data = await res.json();
         if (res.ok) {
           setRecentPosts(data.posts);

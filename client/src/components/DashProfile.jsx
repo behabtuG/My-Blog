@@ -1,4 +1,4 @@
-import { Alert, Button, Modal, ModalBody, TextInput } from "flowbite-react";
+import { Alert, Button, Modal, TextInput } from "flowbite-react";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -22,6 +22,7 @@ import {
 import { useDispatch } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function DashProfile() {
   const { currentUser, error, loading } = useSelector((state) => state.user);
@@ -102,7 +103,7 @@ export default function DashProfile() {
     try {
       dispatch(updateStart());
       const res = await fetch(
-        `http://localhost:5000/api/user/update/${currentUser._id}`,
+        `${API_BASE_URL}/api/user/update/${currentUser._id}`,
         {
           method: "PUT",
           credentials: "include",
@@ -130,7 +131,7 @@ export default function DashProfile() {
     try {
       dispatch(deleteUserStart());
       const res = await fetch(
-        `http://localhost:5000/api/user/delete/${currentUser._id}`,
+        `${API_BASE_URL}/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
           credentials: "include", // Include cookies
@@ -149,7 +150,7 @@ export default function DashProfile() {
 
   const handleSignout = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/user/signout", {
+      const res = await fetch(`${API_BASE_URL}/api/user/signout`, {
         method: "POST",
         credentials: "include",
       });

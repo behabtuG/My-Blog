@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
@@ -14,7 +15,7 @@ export default function DashPosts() {
     const fetchPosts = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/post/getposts?userId=${currentUser._id}`,
+          `${API_BASE_URL}/api/post/getposts?userId=${currentUser._id}`,
           {
             credentials: "include", // Include cookies
           }
@@ -39,7 +40,7 @@ export default function DashPosts() {
     const startIndex = userPosts.length;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`,
+        `${API_BASE_URL}/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`,
         {
           credentials: "include", // Include cookies
         }
@@ -60,7 +61,7 @@ export default function DashPosts() {
     setShowModal(false);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
+        `${API_BASE_URL}/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
         {
           method: "DELETE",
           credentials: "include", // ✅ Allows cookies to be stored

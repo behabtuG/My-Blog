@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function DashProjects() {
   const { currentUser } = useSelector((state) => state.user);
@@ -16,7 +17,7 @@ export default function DashProjects() {
     const fetchProjects = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/project/getprojects?userId=${currentUser._id}`,
+          `${API_BASE_URL}/api/project/getprojects?userId=${currentUser._id}`,
           {
             credentials: "include", // Include cookies
           }
@@ -43,7 +44,7 @@ export default function DashProjects() {
     const startIndex = userProjects.length;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/project/getprojects?userId=${currentUser._id}&startIndex=${startIndex}`,
+        `${API_BASE_URL}/api/project/getprojects?userId=${currentUser._id}&startIndex=${startIndex}`,
         {
           credentials: "include",
         }
@@ -66,7 +67,7 @@ export default function DashProjects() {
     setShowModal(false);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/project/deleteproject/${projectIdToDelete}/${currentUser._id}`,
+        `${API_BASE_URL}/api/project/deleteproject/${projectIdToDelete}/${currentUser._id}`,
         {
           method: "DELETE",
           credentials: "include",

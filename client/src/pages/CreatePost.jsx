@@ -12,6 +12,7 @@ import { useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useNavigate } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function CreatePost() {
   const [file, setFile] = useState(null);
@@ -61,7 +62,7 @@ export default function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/post/create", {
+      const res = await fetch(`${API_BASE_URL}/api/post/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

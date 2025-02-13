@@ -1,24 +1,3 @@
-/*// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "sign-up-f81c5.firebaseapp.com",
-  projectId: "sign-up-f81c5",
-  storageBucket: "sign-up-f81c5.appspot.com",
-  messagingSenderId: "1093267309149",
-  appId: "1:1093267309149:web:28b9f2f0bd466a8db603b4",
-  measurementId: "G-EMT6EJ7R74",
-};
-
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-*/
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -40,9 +19,9 @@ export const app = initializeApp(firebaseConfig);
 /**
  * inside storage rule
  * rules_version = '2';
- * // Craft rules based on data in your Firestore database
- * // allow write: if firestore.get(
- * //  /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
+ *  Craft rules based on data in your Firestore database
+ *  allow write: if firestore.get(
+ *  databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
  * service firebase.storage {
  * match /b/{bucket}/o {
  *  match /{allPaths=**} {

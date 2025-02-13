@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function CommentSection({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
@@ -18,7 +19,7 @@ export default function CommentSection({ postId }) {
     e.preventDefault();
     if (comment.length > 200) return;
     try {
-      const res = await fetch("http://localhost:5000/api/comment/create", {
+      const res = await fetch(`${API_BASE_URL}/api/comment/create`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -44,7 +45,7 @@ export default function CommentSection({ postId }) {
     const getComments = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/comment/getPostComments/${postId}`,
+          `${API_BASE_URL}/api/comment/getPostComments/${postId}`,
           { credentials: "include" }
         );
         if (res.ok) {
@@ -87,7 +88,7 @@ export default function CommentSection({ postId }) {
         return;
       }
       const res = await fetch(
-        `http://localhost:5000/api/comment/likeComment/${commentId}`,
+        `${API_BASE_URL}/api/comment/likeComment/${commentId}`,
         { method: "PUT", credentials: "include" }
       );
       if (res.ok) {
@@ -123,7 +124,7 @@ export default function CommentSection({ postId }) {
   // Handle reply submissions from child Comment components
   const handleReply = async (parentCommentId, replyContent) => {
     try {
-      const res = await fetch("http://localhost:5000/api/comment/create", {
+      const res = await fetch(`${API_BASE_URL}/api/comment/create`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -158,7 +159,7 @@ export default function CommentSection({ postId }) {
         return;
       }
       const res = await fetch(
-        `http://localhost:5000/api/comment/deleteComment/${commentId}`,
+        `${API_BASE_URL}/api/comment/deleteComment/${commentId}`,
         { method: "DELETE", credentials: "include" }
       );
       if (res.ok) {

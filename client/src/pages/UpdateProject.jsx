@@ -13,6 +13,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function UpdateProject() {
   const [file, setFile] = useState(null);
@@ -32,7 +33,7 @@ export default function UpdateProject() {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:5000/api/project/getproject/${projectId}`,
+          `${API_BASE_URL}/api/project/getproject/${projectId}`,
           { credentials: "include" }
         );
         if (!res.ok) {
@@ -103,7 +104,7 @@ export default function UpdateProject() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/project/updateproject/${projectId}/${currentUser._id}`,
+        `${API_BASE_URL}/api/project/updateproject/${projectId}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {

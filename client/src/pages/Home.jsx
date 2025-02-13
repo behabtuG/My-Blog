@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import CommentCard from "../components/CommentCard";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -12,7 +13,7 @@ export default function Home() {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:5000/api/post/getPosts");
+        const res = await fetch(`${API_BASE_URL}/api/post/getPosts`);
         if (!res.ok) throw new Error("Failed to fetch posts");
         const data = await res.json();
         setPosts(data.posts);
@@ -26,7 +27,7 @@ export default function Home() {
     const fetchRecentComments = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/comment/getRecentcomments",
+          `${API_BASE_URL}/api/comment/getRecentcomments`,
           { credentials: "include" }
         );
         if (!res.ok) throw new Error("Failed to fetch recent comments");

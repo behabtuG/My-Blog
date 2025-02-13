@@ -9,6 +9,7 @@ import {
 } from "react-icons/hi";
 import { Button, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function DashboardComp() {
   const [users, setUsers] = useState([]);
@@ -28,12 +29,9 @@ export default function DashboardComp() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(
-          "http://localhost:5000/api/user/getusers?limit=5",
-          {
-            credentials: "include", // Include cookies for authentication
-          }
-        );
+        const res = await fetch(`${API_BASE_URL}/api/user/getusers?limit=5`, {
+          credentials: "include", // Include cookies for authentication
+        });
         const data = await res.json();
         if (res.ok) {
           setUsers(data.users);
@@ -47,12 +45,9 @@ export default function DashboardComp() {
 
     const fetchPosts = async () => {
       try {
-        const res = await fetch(
-          "http://localhost:5000/api/post/getposts?limit=5",
-          {
-            credentials: "include", // Include cookies
-          }
-        );
+        const res = await fetch(`${API_BASE_URL}/api/post/getposts?limit=5`, {
+          credentials: "include", // Include cookies
+        });
         const data = await res.json();
         if (res.ok) {
           setPosts(data.posts);
@@ -67,7 +62,7 @@ export default function DashboardComp() {
     const fetchComments = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/comment/getcomments?limit=5",
+          `${API_BASE_URL}/api/comment/getcomments?limit=5`,
           {
             credentials: "include", // Include cookies
           }
@@ -86,7 +81,7 @@ export default function DashboardComp() {
     const fetchProjects = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/api/project/getprojects?limit=5",
+          `${API_BASE_URL}/api/project/getprojects?limit=5`,
           {
             credentials: "include", // Include cookies
           }
