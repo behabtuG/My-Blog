@@ -6,7 +6,8 @@
   "main": "api/server.js",
   "scripts": {
     "dev": "nodemon api/server.js",
-    "start": "node api/server.js"
+    "start": "node api/server.js",
+    "build": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
