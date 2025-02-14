@@ -28,7 +28,7 @@ mongoose
 
 const app = express();
 const allowedOrigins = [
-  "https://https://behabtu-blogs.vercel.app",
+  "https://behabtu-blogs.vercel.app",
   "http://localhost:5173", // For local development
 ];
 

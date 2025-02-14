@@ -5,7 +5,7 @@ export const create = async (req, res, next) => {
   if (!req.body.title || !req.body.content) {
     return next(errorHandler(400, "Please provide all required fields"));
   }
-  console.log("---create post", req.user.id);
+
   if (!req.user || !req.user.id) {
     return next(errorHandler(401, "Unauthorized: User not found"));
   }
