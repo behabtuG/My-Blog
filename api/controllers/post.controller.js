@@ -2,22 +2,32 @@ import Post from "../models/post.model.js";
 import { errorHandler } from "../utils/errorHandler.js";
 
 export const create = async (req, res, next) => {
-  if (!req.user.isAdmin) {
-    return next(errorHandler(403, "You are not allowed to create a post"));
-  }
   if (!req.body.title || !req.body.content) {
     return next(errorHandler(400, "Please provide all required fields"));
   }
+  console.log("---create post", req.user.id);
+  if (!req.user || !req.user.id) {
+    return next(errorHandler(401, "Unauthorized: User not found"));
+  }
+
   const slug = req.body.title
     .split(" ")
     .join("-")
     .toLowerCase()
     .replace(/[^a-zA-Z0-9-]/g, "");
+
+  // Check if a post with the same slug already exists
+  const existingPost = await Post.findOne({ slug });
+  if (existingPost) {
+    return next(errorHandler(400, "A post with this title already exists"));
+  }
+
   const newPost = new Post({
     ...req.body,
     slug,
-    userId: req.user.id,
+    userId: req.user.id, // Assign the post to the logged-in user
   });
+
   try {
     const savedPost = await newPost.save();
     res.status(201).json(savedPost);

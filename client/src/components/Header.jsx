@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
+import { HiOutlinePencilAlt } from "react-icons/hi";
 const API_BASE_URL = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
 export default function Header() {
@@ -51,7 +52,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar className="border-b-2">
+    <Navbar className="border-b-2 sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md">
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
@@ -117,7 +118,13 @@ export default function Header() {
           <Link to="/">Home</Link>
         </Navbar.Link>
         <Navbar.Link active={path === "/create-post"} as={"div"}>
-          <Link to="/create-post">Write</Link>
+          <Link
+            to={currentUser ? "/create-post" : "/sign-in"}
+            className="flex items-center gap-1"
+          >
+            <HiOutlinePencilAlt className="w-5 h-5" />
+            <span>Write</span>
+          </Link>
         </Navbar.Link>
         <Navbar.Link active={path === "/about"} as={"div"}>
           <Link to="/about">About</Link>

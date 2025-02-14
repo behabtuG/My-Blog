@@ -27,15 +27,32 @@ mongoose
   });
 
 const app = express();
+const allowedOrigins = [
+  "https://https://behabtu-blogs.vercel.app",
+  "http://localhost:5173", // For local development
+];
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+// app.use(
+//   cors({
+//     origin: "https://behabtu-blogs.vercel.app",
+//     origin: "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
 
 // Middleware order is crucial!
+app.use(cors(corsOptions));
 app.use(morgan("dev")); // Log requests *before* other middleware
 app.use(cookieParser()); // Parse cookies *before* routes that use them
 app.use(express.json({ limit: "50mb" })); // Parse JSON *before* routes that use it
