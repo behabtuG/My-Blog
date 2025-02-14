@@ -43,15 +43,6 @@ const corsOptions = {
   credentials: true,
 };
 
-// app.use(
-//   cors({
-//     origin: "https://behabtu-blogs.vercel.app",
-//     origin: "http://localhost:5173",
-//     credentials: true,
-//   })
-// );
-
-// Middleware order is crucial!
 app.use(cors(corsOptions));
 app.use(morgan("dev")); // Log requests *before* other middleware
 app.use(cookieParser()); // Parse cookies *before* routes that use them
