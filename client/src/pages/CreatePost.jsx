@@ -62,15 +62,12 @@ export default function CreatePost() {
     }
   };
   const handleSubmit = async (e) => {
-    console.log("--create post--", currentUser);
-    console.log("---create post----", currentUser?.token);
     e.preventDefault();
     try {
       const res = await fetch(`${API_BASE_URL}/api/post/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Authorization: `Bearer ${currentUser?.token}`,
         },
         credentials: "include",
         body: JSON.stringify(formData),
