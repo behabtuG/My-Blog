@@ -6,8 +6,11 @@
       "use": "@vercel/node"
     },
     {
-      "src": "client/dist",
-      "use": "@vercel/static"
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "client/dist"
+      }
     }
   ],
   "routes": [
@@ -19,5 +22,11 @@
       "src": "/(.*)",
       "dest": "client/dist/index.html"
     }
-  ]
+  ],
+  "env": {
+    "MONGO": "@mongo",
+    "JWT_SECRET": "@jwt_secret",
+    "NODE_ENV": "production",
+    "FORNTEND_URL": "https://behabtu-blogs.vercel.app"
+  }
 }
