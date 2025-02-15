@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import path from "path";
-import { fileURLToPath } from "url";
 import { globalErrorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
@@ -14,9 +12,6 @@ import projectRoutes from "./routes/project.route.js";
 import commentRoutes from "./routes/comment.route.js";
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 mongoose
   .connect(process.env.MONGO, {})
@@ -49,25 +44,18 @@ app.use(cookieParser()); // Parse cookies *before* routes that use them
 app.use(express.json({ limit: "50mb" })); // Parse JSON *before* routes that use it
 app.use(express.urlencoded({ limit: "50mb", extended: true })); // Parse URL-encoded *before* routes
 
-//✅ Serve static files first
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
+// API routes
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/project", projectRoutes);
 app.use("/api/comment", commentRoutes);
 
-//✅ Catch-all route for serving React frontend
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
-
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello Welcome! to Beget");
 });
 
-//✅ Global error handler (must be last)
+// Global error handler (must be last)
 app.use(globalErrorHandler);
 
 const PORT = process.env.PORT || 5000;
