@@ -66,9 +66,9 @@ export const signin = async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: true,
         path: "/",
-        sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax", // Use "strict" in production
-        secure: process.env.NODE_ENV === "production", // HTTPS only in production
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days expiration (optional)
+        sameSite: "None", // Required for cross-origin requests
+        secure: true, // HTTPS only
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
       .json(rest);
   } catch (error) {
@@ -94,9 +94,9 @@ export const google = async (req, res, next) => {
       res.cookie("access_token", token, {
         httpOnly: true,
         path: "/",
-        sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        sameSite: "None", // Change to "None" for cross-origin requests
+        secure: true, // Ensure HTTPS is required
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
     } else {
       const generatedPassword =
@@ -123,9 +123,9 @@ export const google = async (req, res, next) => {
       res.cookie("access_token", token, {
         httpOnly: true,
         path: "/",
-        sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        sameSite: "None", // Change to "None" for cross-origin requests
+        secure: true, // Ensure HTTPS is required
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
     }
 
